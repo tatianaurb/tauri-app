@@ -2,6 +2,7 @@
   "location1": [
     {
       "id": "scene1.jpg",
+      "prev": "scene4.jpg",
       "next": "scene2.jpg"
     },
     {
@@ -16,7 +17,8 @@
     },
     {
       "id": "scene4.jpg",
-      "prev": "scene3.jpg"
+      "prev": "scene3.jpg",
+      "next": "scene1.jpg"
     }
   ]
 }
