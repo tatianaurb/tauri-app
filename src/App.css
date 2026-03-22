@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
 
 /* =============================
-   Základné štýly
+   ZÁKLADNÉ ŠTÝLY
+   - nastavenie celej stránky
+   - font, farby, rozmery
 ============================= */
 html,
 body {
@@ -21,6 +23,63 @@ body {
   box-sizing: border-box;
 }
 
+/* =============================
+   SPLASH SCREEN
+   - zobrazí sa pri štarte appky
+   - logo + animované bodky
+============================= */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  background: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  z-index: 99999;
+}
+
+.splash-logo {
+  width: 160px;
+  height: 160px;
+  border-radius: 32px;
+}
+
+/* Animované bodky */
+.splash-dots {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.splash-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #b36aff;
+  animation: dotPulse 1.2s infinite ease-in-out;
+}
+
+.splash-dots span:nth-child(1) { animation-delay: 0s; }
+.splash-dots span:nth-child(2) { animation-delay: 0.2s; }
+.splash-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% {
+    transform: scale(0.7);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* =============================
+   STATUS BAR
+   - fialový pruh hore (imitácia
+     natívneho status baru na mobile)
+============================= */
 .fake-status-bar {
   position: fixed;
   top: 0;
@@ -34,7 +93,10 @@ body {
 }
 
 /* =============================
-   Fullscreen wrapper
+   HLAVNÝ WRAPPER
+   - použitý na všetkých stránkach
+     okrem scannera a panoramy
+   - tmavé gradientové pozadie
 ============================= */
 .card-modern {
   position: fixed;
@@ -56,7 +118,11 @@ body {
   overflow-y: auto;
 }
 
-/* Home */
+/* =============================
+   HOME OBSAH
+   - karta so skleneným efektom
+   - použitá na home a floors stránke
+============================= */
 .home-content {
   display: flex;
   flex-direction: column;
@@ -73,7 +139,11 @@ body {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
 }
 
-/* Mapa layout */
+/* =============================
+   MAPA LAYOUT
+   - wrapper pre stránku s mapou
+     a zoznamom miestností
+============================= */
 .map-view {
   width: 100%;
   min-height: 100vh;
@@ -85,7 +155,9 @@ body {
   gap: 1rem;
 }
 
-/* Tituly */
+/* =============================
+   NADPISY
+============================= */
 h1 {
   font-size: 2.5rem;
   color: #ffffff;
@@ -104,7 +176,10 @@ h3 {
   color: #d3b3ff;
 }
 
-/* Úvodný text */
+/* =============================
+   ÚVODNÝ TEXT
+   - gradientový text (fialová → biela)
+============================= */
 .intro-text {
   font-size: 1rem;
   line-height: 1.5rem;
@@ -116,7 +191,11 @@ h3 {
   -webkit-text-fill-color: transparent;
 }
 
-/* Tlačidlá */
+/* =============================
+   TLAČIDLÁ — ZÁKLADNÉ NASTAVENIA
+   - spoločné vlastnosti pre všetky
+     hlavné tlačidlá
+============================= */
 .btn-scan,
 .btn-back,
 .btn-map {
@@ -135,7 +214,10 @@ h3 {
   letter-spacing: 0.02em;
 }
 
-/* Hlavné tlačidlo */
+/* =============================
+   TLAČIDLÁ — SKENOVAŤ / VYBRAŤ
+   - fialový gradient
+============================= */
 .btn-scan,
 .btn-map {
   background: linear-gradient(135deg, #7b2cff, #b36aff);
@@ -166,26 +248,35 @@ h3 {
   cursor: not-allowed;
 }
 
-/* Tlačidlo späť */
+/* =============================
+   TLAČIDLO SPÄŤ
+   - tmavšia fialová s borderom
+   - odlíšené od hlavných tlačidiel
+============================= */
 .btn-back {
-  background: linear-gradient(135deg, #7b2cff, #b36aff);
-  color: #ffffff;
+  background: rgba(20, 20, 35, 0.85);
+  color: #c89bff;
   padding: 0.85rem 1.4rem;
+  border: 1.5px solid rgba(179, 106, 255, 0.5) !important;
   box-shadow:
-    0 10px 24px rgba(179, 106, 255, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    0 6px 18px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(179, 106, 255, 0.08) inset;
 }
 
 .btn-back:hover {
-  background: linear-gradient(135deg, #b36aff, #7b2cff);
+  background: rgba(40, 20, 60, 0.95);
+  border-color: rgba(179, 106, 255, 0.8) !important;
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow:
-    0 14px 28px rgba(179, 106, 255, 0.38),
-    0 0 18px rgba(179, 106, 255, 0.2);
+    0 10px 22px rgba(0, 0, 0, 0.35),
+    0 0 14px rgba(179, 106, 255, 0.15);
 }
 
 /* =============================
-   Scanner
+   SCANNER STRÁNKA
+   - priehľadné pozadie (kamera
+     beží natívne na pozadí v Tauri)
 ============================= */
 .scanner-page {
   position: fixed;
@@ -201,6 +292,12 @@ h3 {
   z-index: 1000;
 }
 
+/* =============================
+   SCANNER RÁMČEK
+   - dekoratívny rám so rohmi
+   - rohové čiary sú cez ::before
+     a ::after pseudo-elementy
+============================= */
 .scanner-frame {
   width: 260px;
   height: 260px;
@@ -217,6 +314,7 @@ h3 {
     0 0 60px rgba(123, 44, 255, 0.12);
 }
 
+/* Rohové čiary rámčeka */
 .scanner-frame::before,
 .scanner-frame::after,
 .scanner-frame span::before,
@@ -229,6 +327,7 @@ h3 {
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 }
 
+/* Ľavý horný roh */
 .scanner-frame::before {
   top: -2px;
   left: -2px;
@@ -237,6 +336,7 @@ h3 {
   border-top-left-radius: 18px;
 }
 
+/* Pravý horný roh */
 .scanner-frame::after {
   top: -2px;
   right: -2px;
@@ -245,6 +345,7 @@ h3 {
   border-top-right-radius: 18px;
 }
 
+/* Ľavý dolný roh */
 .scanner-frame span::before {
   bottom: -2px;
   left: -2px;
@@ -253,6 +354,7 @@ h3 {
   border-bottom-left-radius: 18px;
 }
 
+/* Pravý dolný roh */
 .scanner-frame span::after {
   bottom: -2px;
   right: -2px;
@@ -262,7 +364,9 @@ h3 {
 }
 
 /* =============================
-   Panorama
+   PANORAMA — WRAPPER
+   - fullscreen overlay pre 360°
+     zobrazenie miestnosti
 ============================= */
 .fixed-detail {
   position: fixed;
@@ -286,11 +390,17 @@ h3 {
   overflow: hidden;
 }
 
+/* Kontajner pre photo-sphere-viewer */
 .panorama-container {
   width: 100%;
   height: 100%;
 }
 
+/* =============================
+   PANORAMA — LOADER / ERROR
+   - zobrazí sa počas načítavania
+     alebo pri chybe panoramy
+============================= */
 .panorama-loader {
   position: absolute;
   inset: 0;
@@ -308,6 +418,11 @@ h3 {
   font-weight: 600;
 }
 
+/* =============================
+   PHOTO-SPHERE-VIEWER — OVERRIDES
+   - skrytie defaultných UI prvkov
+     viewera (navbar, loader, overlay)
+============================= */
 .psv-navbar,
 .psv-caption,
 .psv-panel,
@@ -325,6 +440,7 @@ h3 {
   border: none !important;
 }
 
+/* Tlačidlo späť v panorame — ľavý horný roh */
 .btn-back-panorama {
   position: absolute;
   top: calc(env(safe-area-inset-top, 0px) + 30px);
@@ -332,11 +448,10 @@ h3 {
   z-index: 20;
   width: auto;
   max-width: none;
-  box-shadow: 0 10px 20px rgba(179, 106, 255, 0.35);
 }
 
 /* =============================
-   Mapa
+   MAPA — OBRÁZOK A KONTAJNER
 ============================= */
 .map-container {
   position: relative;
@@ -360,6 +475,11 @@ h3 {
   background: #11111a;
 }
 
+/* =============================
+   MAPA — HOTSPOTY
+   - klikateľné body na mape
+   - fialový krúžok s bielym okrajom
+============================= */
 .map-hotspot-indicator {
   position: absolute;
   width: 44px;
@@ -389,7 +509,9 @@ h3 {
 }
 
 /* =============================
-   Zoznam miestností
+   ZOZNAM MIESTNOSTÍ
+   - dropdown so zoznamom miestností
+     pod mapou
 ============================= */
 .rooms-list {
   width: 100%;
@@ -409,6 +531,7 @@ h3 {
   animation: fadeSlideDown 0.22s ease;
 }
 
+/* Jednotlivé tlačidlá miestností */
 .room-item-btn {
   width: 100%;
   border: 1px solid rgba(179, 106, 255, 0.22);
@@ -449,6 +572,10 @@ h3 {
   transform: translateY(0);
 }
 
+/* =============================
+   HORNÁ LIŠTA NA MAPE
+   - obsahuje tlačidlo späť
+============================= */
 .map-top-bar {
   width: 100%;
   display: flex;
@@ -456,6 +583,7 @@ h3 {
   padding: 0 1rem;
 }
 
+/* Tlačidlo späť v hornej lište — automatická šírka */
 .btn-top-back {
   width: auto;
   max-width: none;

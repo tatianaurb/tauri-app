@@ -15,7 +15,7 @@ import "photo-sphere-viewer/dist/photo-sphere-viewer.css";
 import "./App.css";
 
 function App() {
-  const [page, setPage] = useState("home"); 
+  const [page, setPage] = useState("home"); // home | floors | floorDetail | scan | detail
   const [loading, setLoading] = useState(false);
   const [roomText, setRoomText] = useState("");
   const [roomImage, setRoomImage] = useState("");
@@ -25,11 +25,21 @@ function App() {
   const [panoramaLoading, setPanoramaLoading] = useState(false);
   const [cameFromMap, setCameFromMap] = useState(false);
   const [roomsDropdownOpen, setRoomsDropdownOpen] = useState(false);
+  const [appReady, setAppReady] = useState(false);
   const viewerRef = useRef(null);
 
   const FLOORS_JSON_URL =
     "https://raw.githubusercontent.com/tatianaurb/rooms-data/main/floors.json";
 
+  // Splash screen — zobrazí sa 2 sekundy pri štarte
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAppReady(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Načítaj zoznam poschodí pri štarte
   useEffect(() => {
     const fetchFloors = async () => {
       try {
@@ -45,6 +55,7 @@ function App() {
     fetchFloors();
   }, []);
 
+  // Načítaj miestnosti pre vybrané poschodie
   useEffect(() => {
     const fetchRoomsForFloor = async () => {
       if (!selectedFloor || !floorsData[selectedFloor]?.roomsFile) {
@@ -69,6 +80,7 @@ function App() {
     }
   }, [selectedFloor, floorsData, page]);
 
+  // Panorama viewer s opraveným error handlerom
   useEffect(() => {
     if (page === "detail" && roomImage) {
       if (viewerRef.current) {
@@ -126,6 +138,24 @@ function App() {
       }
     };
   }, [page, roomImage]);
+
+  // Splash screen — zobrazí sa kým sa appka inicializuje
+  if (!appReady) {
+    return (
+      <div className="splash-screen">
+        <img
+          src="/src/assets/app_logo.png"
+          alt="Logo"
+          className="splash-logo"
+        />
+        <div className="splash-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    );
+  }
 
   const handleScan = async () => {
     setLoading(true);
@@ -247,6 +277,16 @@ function App() {
   };
 
   const openFloorDetail = (floor) => {
+    // Vonku nemá mapu — otvor rovno panoramu
+    if (floor === "outside") {
+      setRoomText("Nachádzate sa pred budovou fakulty. Vstup do budovy je priamo pred vami.");
+      setRoomImage("https://raw.githubusercontent.com/tatianaurb/rooms-data/refs/heads/main/images/outside/vonku.jpg");
+      setCameFromMap(false);
+      setSelectedFloor("outside");
+      setPage("detail");
+      return;
+    }
+
     setSelectedFloor(floor);
     setRoomsDropdownOpen(false);
     setPage("floorDetail");
@@ -358,7 +398,7 @@ function App() {
         <div className="card-modern text-center">
           <div className="map-view">
             <div className="map-top-bar">
-              <button className="btn btn-map btn-top-back" onClick={openFloorsList}>
+              <button className="btn btn-back btn-top-back" onClick={openFloorsList}>
                 ← Späť
               </button>
             </div>
