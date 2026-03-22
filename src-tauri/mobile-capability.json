@@ -1,0 +1,23 @@
+{
+  "identifier": "default",
+  "commands": ["greet"],
+  "plugins": ["barcode-scanner", "opener"],
+  "config": {
+    "barcode-scanner": {
+      "android": { "permissions": ["android.permission.CAMERA"] },
+      "ios": { "permissions": ["NSCameraUsageDescription"] }
+    },
+    "opener": {
+      "android": { "permissions": [] },
+      "ios": { "permissions": [] }
+    }
+  },
+  "windows": [
+    {
+      "label": "main",
+      "fullscreen": false,
+      "resizable": true,
+      "title": "QR School Tour"
+    }
+  ]
+}

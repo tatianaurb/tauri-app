@@ -1,0 +1,29 @@
+{
+  "name": "qr-school-tour",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 1420",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.9.0",
+    "@tauri-apps/plugin-barcode-scanner": "^2.4.2",
+    "@tauri-apps/plugin-opener": "^2",
+    "lottie": "^0.0.1",
+    "lottie-react": "^2.4.1",
+    "pannellum": "^2.5.7",
+    "photo-sphere-viewer": "^4.8.1",
+    "qrcode": "^1.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2",
+    "@vitejs/plugin-react": "^4.6.0",
+    "vite": "^7.0.4"
+  }
+}
