@@ -36,7 +36,6 @@ body {
 /* =============================
    Fullscreen wrapper
 ============================= */
-.fullscreen-container,
 .card-modern {
   position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + 28px);
@@ -86,11 +85,6 @@ body {
   gap: 1rem;
 }
 
-.btn-hide-map {
-  max-width: 220px;
-  margin-top: 0.5rem;
-}
-
 /* Tituly */
 h1 {
   font-size: 2.5rem;
@@ -125,7 +119,6 @@ h3 {
 /* Tlačidlá */
 .btn-scan,
 .btn-back,
-.btn-uniza,
 .btn-map {
   font-weight: 700;
   border-radius: 16px;
@@ -173,48 +166,26 @@ h3 {
   cursor: not-allowed;
 }
 
-/* Tlačidlo UNIZA */
-.btn-uniza {
-  background-color: transparent;
-  color: #b36aff;
-  border: 2px solid #b36aff;
-  padding: 0.65rem 1rem;
-}
-
-.btn-uniza:hover {
-  background-color: #b36aff;
-  color: #0a0a0a;
-  border-color: #ffffff;
-}
-
-/* Výsledok skenovania */
-.result-box {
-  background-color: rgba(179, 106, 255, 0.1);
-  border: 1px solid rgba(179, 106, 255, 0.3);
+/* Tlačidlo späť */
+.btn-back {
+  background: linear-gradient(135deg, #7b2cff, #b36aff);
   color: #ffffff;
-  font-weight: 600;
-  border-radius: 16px;
-  min-height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  word-break: break-word;
-  margin-top: 1.5rem;
-  padding: 1rem;
-  width: 100%;
-  max-width: 320px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  padding: 0.85rem 1.4rem;
+  box-shadow:
+    0 10px 24px rgba(179, 106, 255, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
 }
 
-.result-box.error {
-  background-color: #ff55ff1a;
-  border-color: #ff55ff;
-  color: #ff5555;
+.btn-back:hover {
+  background: linear-gradient(135deg, #b36aff, #7b2cff);
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(179, 106, 255, 0.38),
+    0 0 18px rgba(179, 106, 255, 0.2);
 }
 
 /* =============================
    Scanner
-   POZADIE NEMENENÉ
 ============================= */
 .scanner-page {
   position: fixed;
@@ -230,7 +201,6 @@ h3 {
   z-index: 1000;
 }
 
-/* ZMENENÝ IBA FRAME */
 .scanner-frame {
   width: 260px;
   height: 260px;
@@ -291,75 +261,9 @@ h3 {
   border-bottom-right-radius: 18px;
 }
 
-/* Tlačidlo späť */
-.btn-back {
-  background: linear-gradient(135deg, #7b2cff, #b36aff);
-  color: #ffffff;
-  padding: 0.85rem 1.4rem;
-  box-shadow:
-    0 10px 24px rgba(179, 106, 255, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
-}
-
-.btn-back:hover {
-  background: linear-gradient(135deg, #b36aff, #7b2cff);
-  transform: translateY(-2px);
-  box-shadow:
-    0 14px 28px rgba(179, 106, 255, 0.38),
-    0 0 18px rgba(179, 106, 255, 0.2);
-}
-
-/* Zoznam miestností */
-.rooms-grid-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.75rem;
-  margin-top: 1rem;
-  width: 100%;
-  max-width: 320px;
-}
-
-.btn-room-grid {
-  background: linear-gradient(135deg, #7b2cff, #b36aff);
-  color: #ffffff;
-  font-weight: 600;
-  border: none;
-  border-radius: 12px;
-  padding: 0.6rem 0;
-  cursor: pointer;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.18s ease;
-  box-shadow: 0 8px 18px rgba(179, 106, 255, 0.24);
-}
-
-.btn-room-grid:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 22px rgba(179, 106, 255, 0.34);
-  background: linear-gradient(135deg, #b36aff, #7b2cff);
-}
-
-/* Horné tlačidlo */
-#topButton {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 999999;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #7b2cff, #b36aff);
-  color: #ffffff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 10px 22px rgba(179, 106, 255, 0.28);
-}
-
-button#topButton:hover {
-  background: linear-gradient(135deg, #b36aff, #7b2cff);
-}
-
-/* Panorama */
+/* =============================
+   Panorama
+============================= */
 .fixed-detail {
   position: fixed;
   top: 0;
@@ -404,12 +308,12 @@ button#topButton:hover {
   font-weight: 600;
 }
 
-/* FIX PANORAMA */
 .psv-navbar,
 .psv-caption,
 .psv-panel,
 .psv-loader,
-.psv-loader-container {
+.psv-loader-container,
+.psv-overlay {
   display: none !important;
 }
 
@@ -431,7 +335,9 @@ button#topButton:hover {
   box-shadow: 0 10px 20px rgba(179, 106, 255, 0.35);
 }
 
-/* Mapa */
+/* =============================
+   Mapa
+============================= */
 .map-container {
   position: relative;
   display: inline-block;
@@ -454,18 +360,6 @@ button#topButton:hover {
   background: #11111a;
 }
 
-.map-hotspot {
-  border-radius: 50%;
-  background: rgba(179, 106, 255, 0.3);
-  border: 2px solid #b36aff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  transition: all 0.2s ease;
-}
-
-/* hotspot */
 .map-hotspot-indicator {
   position: absolute;
   width: 44px;
@@ -494,29 +388,9 @@ button#topButton:hover {
     0 0 16px rgba(179, 106, 255, 0.45);
 }
 
-/* Výber poschodí */
-.floor-nav {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.floor-btn {
-  background: transparent;
-  border: 2px solid #b36aff;
-  color: #b36aff;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
-}
-
-.active-floor {
-  background: linear-gradient(135deg, #7b2cff, #b36aff);
-  color: white;
-}
-
+/* =============================
+   Zoznam miestností
+============================= */
 .rooms-list {
   width: 100%;
   max-width: 420px;
@@ -537,7 +411,7 @@ button#topButton:hover {
 
 .room-item-btn {
   width: 100%;
-  border: none;
+  border: 1px solid rgba(179, 106, 255, 0.22);
   border-radius: 16px;
   padding: 0.95rem 1rem;
   background: rgba(20, 20, 30, 0.82);
@@ -548,7 +422,6 @@ button#topButton:hover {
   text-align: center;
   letter-spacing: 0.02em;
   cursor: pointer;
-  border: 1px solid rgba(179, 106, 255, 0.22);
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.24),
     0 0 0 1px rgba(255, 255, 255, 0.02) inset;
@@ -576,52 +449,14 @@ button#topButton:hover {
   transform: translateY(0);
 }
 
-.rooms-list {
+.map-top-bar {
   width: 100%;
-  max-width: 420px;
-  margin-top: 0.4rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  padding: 0 1rem;
 }
 
-.rooms-buttons {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 0.9rem;
-  animation: fadeSlideDown 0.22s ease;
-}
-
-.room-item-btn {
-  width: 100%;
-  border: none;
-  border-radius: 16px;
-  padding: 0.95rem 1rem;
-  background: rgba(20, 20, 30, 0.82);
-  color: #ffffff;
-  font-family: "Orbitron", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-align: center;
-  letter-spacing: 0.02em;
-  background-color: #7b2cff;
-}
-
-.room-item-btn:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(
-    135deg,
-    rgba(123, 44, 255, 0.92),
-    rgba(179, 106, 255, 0.92)
-  );
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 14px 28px rgba(179, 106, 255, 0.28),
-    0 0 18px rgba(179, 106, 255, 0.12);
-}
-
-.room-item-btn:active {
-  transform: translateY(0);
+.btn-top-back {
+  width: auto;
+  max-width: none;
 }

@@ -95,6 +95,28 @@ function App() {
       viewerRef.current.once("error", () => {
         setPanoramaLoading("error");
       });
+
+      // Zachytí HttpError ktorý photo-sphere-viewer hádže ako unhandled promise rejection
+      const handleUnhandledRejection = (event) => {
+        if (
+          event.reason?.name === "HttpError" ||
+          event.reason?.message?.includes("404") ||
+          event.reason?.message?.includes("fetch")
+        ) {
+          setPanoramaLoading("error");
+          event.preventDefault();
+        }
+      };
+
+      window.addEventListener("unhandledrejection", handleUnhandledRejection);
+
+      return () => {
+        window.removeEventListener("unhandledrejection", handleUnhandledRejection);
+        if (viewerRef.current) {
+          viewerRef.current.destroy();
+          viewerRef.current = null;
+        }
+      };
     }
 
     return () => {
@@ -399,8 +421,6 @@ function App() {
                 </div>
               )}
             </div>
-
-           
           </div>
         </div>
       )}
@@ -443,11 +463,15 @@ function App() {
                     loop={true}
                     style={{ width: 150, height: 150 }}
                   />
-                  <p>Chyba pri načítaní panorámy.</p>
+                  <p>Panoráma tejto miestnosti je nesprávne nahratá.</p>
                 </div>
               )}
 
-              <div id="panorama" className="panorama-container" />
+              <div
+                id="panorama"
+                className="panorama-container"
+                style={{ display: panoramaLoading === "error" ? "none" : "block" }}
+              />
 
               <button
                 className="btn-back btn-back-panorama"
